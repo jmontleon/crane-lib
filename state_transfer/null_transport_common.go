@@ -16,6 +16,8 @@ type NullTransport struct {
 	clientContainers []v1.Container
 	clientVolumes    []v1.Volume
 	direct           bool
+	proxyOptions     ProxyOptions
+	verifyCA         bool
 }
 
 func (s *NullTransport) SetCA(b *bytes.Buffer) {
@@ -84,4 +86,20 @@ func (s *NullTransport) ServerVolumes() []v1.Volume {
 
 func (s *NullTransport) Direct() bool {
 	return s.direct
+}
+
+func (s *NullTransport) SetProxyOptions(proxyOptions *ProxyOptions) {
+	s.proxyOptions = proxyOptions
+}
+
+func (s *NullTransport) ProxyOptions() *ProxyOptions {
+	return s.proxyOptions
+}
+
+func (s *NullTransport) SetVerifyCA(verifyCA bool) {
+	s.verifyCA = verifyCA
+}
+
+func (s *NullTransport) VerifyCA() bool {
+	return s.verifyCA
 }

@@ -92,3 +92,19 @@ func (s *StunnelTransport) ServerVolumes() []v1.Volume {
 func (s *StunnelTransport) Direct() bool {
 	return s.direct
 }
+
+func (s *StunnelTransport) SetProxyOptions(proxyOptions *ProxyOptions) {
+	s.proxyOptions = proxyOptions
+}
+
+func (s *StunnelTransport) ProxyOptions() *ProxyOptions {
+	return s.proxyOptions
+}
+
+func (s *StunnelTransport) SetVerifyCA(verifyCA bool) {
+	s.verifyCA = verifyCA
+}
+
+func (s *StunnelTransport) VerifyCA() bool {
+	return s.verifyCA
+}
