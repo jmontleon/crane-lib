@@ -86,6 +86,7 @@ func (i *IngressEndpoint) createIngressService(c client.Client) error {
 			Ports: []corev1.ServicePort{
 				{
 					Name:     i.NamespacedName().Name,
+					NodePort: int32(31700),
 					Protocol: corev1.ProtocolTCP,
 					Port:     i.Port(),
 					TargetPort: intstr.IntOrString{
@@ -98,6 +99,9 @@ func (i *IngressEndpoint) createIngressService(c client.Client) error {
 		},
 	}
 	// TODO: consider patching an existing object if it already exists
+	fmt.Sprintf("############################################################")
+	fmt.Sprintf(service.Spec.Ports[0].NodePort)
+	fmt.Sprintf("############################################################")
 	err := c.Create(context.TODO(), &service, &client.CreateOptions{})
 	if err != nil && !k8serrors.IsAlreadyExists(err) {
 		return err
