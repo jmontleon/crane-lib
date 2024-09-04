@@ -137,6 +137,12 @@ func (s *ServiceEndpoint) createService(c client.Client) error {
 		},
 	}
 
+	if s.NamespacedName().Name == "directvolumemigration-rsync-transfer-svc" {
+		service.Spec.Ports[0].NodePort = 30700
+	} else if s.NamespacedName().Name == "directvolumemigration-rsync-transfer-svc-block" {
+		service.Spec.Ports[0].NodePort = 31700
+	}
+
 	err := c.Create(context.TODO(), &service, &client.CreateOptions{})
 	if err != nil && !k8serrors.IsAlreadyExists(err) {
 		return err
