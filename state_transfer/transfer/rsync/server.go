@@ -203,7 +203,6 @@ func createRsyncServer(c client.Client, r *RsyncTransfer, ns string) error {
 				"--daemon",
 				"--no-detach",
 				fmt.Sprintf("--port=%d", r.Transport().ExposedPort()),
-				"-vvv",
 			},
 			Ports: []corev1.ContainerPort{
 				{
